@@ -3,32 +3,52 @@ import pyttsx3
 
 
 recognizer = sr.Recognizer()
-engine = pyttsx3.init()
+talk = pyttsx3.init()
 
 def speak(text):
-    engine.say(text)
-    engine.runAndWait()
+    talk.say(text)
+    talk.runAndWait()
+
+def listen():
+    with sr.Microphone() as mic:
+        recognizer.adjust_for_ambient_noise(mic, duration=0.3)
+        audio = recognizer .listen(mic)
+    
+    try:
+        text = recognizer.recognize_google(audio)
+        return text.lower()
+    except sr.UnknownValueError:
+        return ""
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
 
 while True:
+    print("Jarvis is sleeping...")
+    text = listen()
 
-    try:
-
-        with sr.Microphone() as mic:
-
-            recognizer.adjust_for_ambient_noise(mic, duration=0.2)
-            audio = recognizer.listen(mic)
-
-            text = recognizer.recognize_google(audio)
-            text = text.lower()
-
-            print(f"Recognized {text}")
-            speak(f"You said: {text}")
-
-    except sr.UnknownValueError:
-        recognizer = sr.Recognizer()
-        continue
-
-    except sr.RequestError as e:
-        print(f"API error: {e}")
+    if "jarvis" in text:
         break
+speak("Hello sir, what can i do for you?")
+print("Awake and ready for help")
+while True:
+    command = listen()  # listen fresh every iteration
+    if command == "":
+        print("Didn't catch that")
+        continue
+    print(f"Command recived: {command}")
+    speak(f"You gave me command to: {command}")
+
+    if "sleep" in command:
+        break
+
+speak("Goodnight sir")
+print("Jarvis is sleeping...")
+
+
+
+
+
+
+
 
