@@ -1,18 +1,27 @@
 import speech_recognition as sr
 import pyttsx3 
+import time
 
 
-recognizer = sr.Recognizer()
-talk = pyttsx3.init()
+
+
 
 def speak(text):
+    talk = pyttsx3.init()
+    talk.setProperty("rate", 150)
     talk.say(text)
     talk.runAndWait()
+    time.sleep(0.3)
+
 
 def listen():
+    recognizer = sr.Recognizer()
     with sr.Microphone() as mic:
         recognizer.adjust_for_ambient_noise(mic, duration=0.3)
-        audio = recognizer .listen(mic)
+        try:
+            audio = recognizer.listen(mic, timeout=5)
+        except sr.WaitTimeoutError:
+            return ""
     
     try:
         text = recognizer.recognize_google(audio)
@@ -21,6 +30,7 @@ def listen():
         return ""
     except Exception as e:
         print(f"Unexpected error: {e}")
+        return ""         
 
 
 while True:
@@ -32,12 +42,12 @@ while True:
 speak("Hello sir, what can i do for you?")
 print("Awake and ready for help")
 while True:
-    command = listen()  # listen fresh every iteration
-    if command == "":
+    command = listen()
+    if not command:
         print("Didn't catch that")
         continue
-    print(f"Command recived: {command}")
-    speak(f"You gave me command to: {command}")
+    print(f"Command received: {command}")
+    speak(f"You gave me a command to: {command}")
 
     if "sleep" in command:
         break
