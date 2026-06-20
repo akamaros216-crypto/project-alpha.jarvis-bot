@@ -1,6 +1,8 @@
+
 import speech_recognition as sr
 import pyttsx3 
 import time
+from skills import timer
 
 
 
@@ -48,6 +50,9 @@ while True:
         continue
     print(f"Command received: {command}")
     speak(f"You gave me a command to: {command}")
+
+    if "timer" in command:
+        timer.run(command, speak)
 
     if "sleep" in command:
         break
