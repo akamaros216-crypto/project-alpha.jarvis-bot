@@ -2,7 +2,7 @@
 import speech_recognition as sr
 import pyttsx3 
 import time
-from skills import timer, open_app
+from skills import timer, open_app, close_app
 
 
 
@@ -56,6 +56,9 @@ while True:
     
     elif "open" in command:
         open_app.run(command, speak)
+    
+    elif "close" in command:
+        close_app.run(command, speak)
 
     if "sleep" in command:
         break

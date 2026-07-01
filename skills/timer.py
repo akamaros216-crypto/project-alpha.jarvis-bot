@@ -34,6 +34,7 @@ def _countdown(seconds, speak):
     time.sleep(seconds)
     winsound.Beep(1000, 500)
     speak("The timer is done")
+    print("Timer done!")
 
 
 
