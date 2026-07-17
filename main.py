@@ -17,6 +17,7 @@ def speak(text):
 
 
 def listen():
+    time.sleep(0.5)
     recognizer = sr.Recognizer()
     with sr.Microphone() as mic:
         recognizer.adjust_for_ambient_noise(mic, duration=0.3)
@@ -65,11 +66,3 @@ while True:
 
 speak("Goodnight sir")
 print("Jarvis is sleeping...")
-
-
-
-
-
-
-
-
