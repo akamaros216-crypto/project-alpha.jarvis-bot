@@ -23,6 +23,7 @@ def run(command, speak):
                     try:
                         result = subprocess.run(f'taskkill /IM {app} /F', shell=True, capture_output=True, text=True)
                         if result.returncode == 0:
+                            speak(f"You gave me a command to: {command}")
                             print(f"Successfully closed {app}")
                             speak(f"Closed {app}")
                         else:

@@ -24,7 +24,7 @@ def run(command, speak):
     if seconds is None:
         speak("Sorry didnt catch that")
         return
-    
+    speak(f"You gave me a command to: {command}")
     speak(f"Setting a timer for {number} {unit}")
     t = threading.Thread(target=_countdown, args=(seconds, speak))
     t.daemon = True

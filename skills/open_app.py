@@ -31,7 +31,8 @@ def run(command, speak):
                         subprocess.Popen(app)
                     else:
                         subprocess.Popen(f'start "" "{app}"', shell=True)
-
+                    
+                    speak(f"You gave me a command to: {command}")
                     print("App successfully opened")
                     speak(f"Opening {app_key}")
 

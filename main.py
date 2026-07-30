@@ -3,6 +3,7 @@ import speech_recognition as sr
 import pyttsx3 
 import time
 from skills import timer, open_app, close_app
+from ai_brain import ask_ollama as ask_ollama_run
 
 
 
@@ -49,8 +50,6 @@ while True:
     if not command:
         print("Didn't catch that")
         continue
-    print(f"Command received: {command}")
-    speak(f"You gave me a command to: {command}")
 
     if "timer" in command:
         timer.run(command, speak)
@@ -60,9 +59,13 @@ while True:
     
     elif "close" in command:
         close_app.run(command, speak)
-
-    if "sleep" in command:
+    
+    elif "sleep" in command:
         break
+
+    else:
+        ask_ollama_run(command, speak)
+        
 
 speak("Goodnight sir")
 print("Jarvis is sleeping...")
