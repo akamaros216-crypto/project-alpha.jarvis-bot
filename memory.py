@@ -1,0 +1,1 @@
+VAULT_PATH = "C:\Users\Hcc\Desktop\project\jarvis-memory\Memory.md"
